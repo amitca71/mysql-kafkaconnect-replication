@@ -1,11 +1,11 @@
-1) . ./.env
-2) docker-compose up -d
-3) create user with replication permissions
-- docker-compose exec mysql-master bash -c 'mysql -u root -pmy_root_password my_database'
-- GRANT LOCK TABLES,SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'my_user';
 
-4) create tables and insert data:
-CREATE TABLE Persons (
+1) docker-compose up -d
+2) create user with replication permissions
+- docker-compose exec mysql-master bash -c 'mysql -u root -pmy_root_password my_database'
+mysql> GRANT LOCK TABLES,SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'my_user';
+
+3) create tables and insert data:
+mysql> CREATE TABLE Persons (
         PersonID int,
         LastName varchar(255),
         FirstName varchar(255),
@@ -50,7 +50,7 @@ Query OK, 1 row affected (0.01 sec)
 mysql> insert into animals  values(3, 'atalef');
 Query OK, 1 row affected (0.00 sec)
 
-5) create connectors:  
+4) create connectors:  
   curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @mysql-init-snap.json
   curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @mysql-never-snap.json
-6) view control center (localhost:9021)
+5) view control center (localhost:9021)
