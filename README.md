@@ -1,7 +1,8 @@
 
 1) docker-compose up -d
 2) create user with replication permissions
-- docker-compose exec mysql-master bash -c 'mysql -u root -pmy_root_password my_database'. 
+- docker-compose exec mysql-master bash -c 'mysql -u root -pmy_root_password my_database'.    
+
 mysql> GRANT LOCK TABLES,SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'my_user';  
 
 3) create tables and insert data:
